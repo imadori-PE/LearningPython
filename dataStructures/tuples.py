@@ -5,40 +5,12 @@
 # * tuples are more efficient, so in our program when we are making
 # * temporary variables we prefer tuples over lists
 
-
-'''
-Write a program to read through the mbox-short.txt and figure out the distribution by hour 
-of the day for each of the messages. You can pull the hour out from the 'From ' line by 
-finding the time and then splitting the string a second time using a colon.
-From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
-Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
-'''
-
-name = input("Enter file:")
-if len(name) < 1:
-    name = "mbox-short.txt"
-handle = open(name)
-senders=dict()
-for line in handle:
-    line=line.strip()
-    if line.startswith('From '):
-        words=line.split()
-        blockHour=words[5].split(':')
-        hour=blockHour[0]
-        senders[hour]=senders.get(hour,0)+1
-lst=list()
-lst=sorted([(k,v) for k,v in senders.items()])
-for k,v in lst:
-    print(k,v)
-quit()
-
 x = ('eevee','vaporeon','flaeron','jolteon')
 lst = ['eevee','vaporeon','flaeron','jolteon']
 #print(dir(x))
 print(x.index('vaporeon'), lst.index('vaporeon'))
 # * index work both in Python lists and Python tuples
 print(x[2])
-quit()
 
 for iter in x:
     print(iter)
@@ -102,3 +74,28 @@ lst=list()
 # TODO shorter version, list comprehension creates a dynamic list
 lst=sorted([(k,v) for k,v in senders.items()],reverse=True)
 print(lst[0])
+
+'''
+Write a program to read through the mbox-short.txt and figure out the distribution by hour 
+of the day for each of the messages. You can pull the hour out from the 'From ' line by 
+finding the time and then splitting the string a second time using a colon.
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
+'''
+
+name = input("Enter file:")
+if len(name) < 1:
+    name = "mbox-short.txt"
+handle = open(name)
+senders=dict()
+for line in handle:
+    line=line.strip()
+    if line.startswith('From '):
+        words=line.split()
+        blockHour=words[5].split(':')
+        hour=blockHour[0]
+        senders[hour]=senders.get(hour,0)+1
+lst=list()
+lst=sorted([(k,v) for k,v in senders.items()])
+for k,v in lst:
+    print(k,v)
