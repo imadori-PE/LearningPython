@@ -13,7 +13,7 @@
 # ? +? repeats a character one o more times (non-greedy)
 # ? [aeiou] matches a single character in the listed set
 # ? [^XYZ] matches a single character  not in the listed set
-# ? [a-z0-0] the set of characters can include a range
+# ? [a-z0-9] the set of characters can include a range
 # ? ( indicates where string extraction is to start
 # ? ) indicates where string extraction is to end
 # * import library import re
