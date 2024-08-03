@@ -1,6 +1,13 @@
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import ssl
+import site
+import sys
+
+# * Python Global Environment: To see the exact path on your system, you can use the following Python command:
+print(site.getsitepackages())
+# * Virtual environment (venv or virtualenv):
+print(sys.path)
 
 # ? example with SSL certificate 
 ctx = ssl.create_default_context()
