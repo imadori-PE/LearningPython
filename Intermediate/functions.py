@@ -1,4 +1,35 @@
 
+def adition(*numbers):
+    total = 0
+    for i in numbers:
+        total = total + i
+    return total
+
+def operations2(**kwargs):
+    # * sum
+    sumTotal = 0
+    for llave, valor in kwargs.items():
+        print(f'{llave} {valor}')
+
+def operations(*arg):
+    if len(arg)==2:
+        return arg[0]*arg[1]    
+    elif len(arg)==3:
+        return sum(arg)/len(arg)
+    else:
+        return 'Error send args'
+   
+dic_data = {'g1': 9.812, 'euler':2.719, 'pi':3.14159} 
+print(operations())
+print(operations(12,4))
+print(operations(12,4,2))
+print(operations2(p1= 12, p2=17, p3=3))
+print(operations2(**dic_data))
+print(adition(1,2,3,4,5,6,7,8,9,10))
+
+quit()
+
+
 # TODO implements the calculation of the electric force between two point charges q1 and q2 separated by a distance d meters. using Coulomb's law
 # ? function with default parameter value
 def couloumb(q1,q2,d,K = 9*10**9):
