@@ -6,9 +6,11 @@
 # ? $ matches the end of the line
 # ? . matches any character
 # ? \s matches whitespaces
+# ? \d matches a digit
 # ? \S matches any non-whitespace character
 # ? * repeats a character zero or more times
 # ? *? repeats a character zero or more times (non-greedy)
+# ? ? optional character
 # ? + repeats a character one o more times
 # ? +? repeats a character one o more times (non-greedy)
 # ? [aeiou] matches a single character in the listed set
