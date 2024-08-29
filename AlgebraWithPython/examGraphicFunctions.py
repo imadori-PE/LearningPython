@@ -58,44 +58,79 @@ def graph_table_equation():
 
 def solve_two_equations():
     x,y = symbols('x y')
-    print("Remember to use Python syntax with x and y as variables, each equation is already set equal to zero")
+    print("Solve linear and quadratic equations with x and y as variables, each equation is already set equal to zero")
     firsteq = input("Enter the first equation: 0 = ")
     secondeq = input("Enter the second equation: 0 = ")
-    solution = linsolve([firsteq, secondeq], (x, y))
-    x_solution = solution.args[0][0]
-    y_solution = solution.args[0][1]
+    try:
+        eq1=eval(firsteq)
+        eq2=eval(secondeq)
+    except  Exception:
+        print(f"Error evaluating any equation")
+        return
     
-    print("x = ", x_solution)
-    print("y = ", y_solution)
+    solution = nonlinsolve([eq1, eq2], (x, y))
+    for a in range(len(solution.args)):
+        print(f'Solution = ( {solution.args[a][0]} , {solution.args[a][1]} )')
+    
 
 def graph_two_equations():
     x,y = symbols('x y')
     firsteq = input("Enter the first equation: y = ")
     secondeq = input("Enter the second equation: y = ")
-    solution = linsolve([firsteq -y, secondeq-y], (x, y))
-    xpoints, ypoints = [],[]
-    # * solve equations for find intersection point
-    print()
-    for a in range(len(solution.args)):
-        xpoints.append(solution.args[a][0])
-        ypoints.append(solution.args[a][1])
-        
-    fig,ax,x = displaying_axis()
     try:
-        y1=eval(firsteq)
-        y2=eval(secondeq)
+        eq1=eval(firsteq)
+        eq2=eval(secondeq)
     except  Exception:
         print(f"Error evaluating any equation")
         return
     
-    print(xpoints,ypoints)
+    solution = nonlinsolve([ eq1-y, eq2-y], (x, y)) # * substract y for let to the function equal to zero
+    xpoints, ypoints = [],[]
+    # * solve equations for find intersection point
+    for a in range(len(solution.args)):
+        print(f'Point of intersection = ( {solution.args[a][0]} , {solution.args[a][1]} )')
+        xpoints.append(solution.args[a][0])
+        ypoints.append(solution.args[a][1])
+        
+    fig,ax,x = displaying_axis()
+    
+    eq1=eval(firsteq)
+    eq2=eval(secondeq)
+        
+    # * intersection points
     plt.plot(xpoints,ypoints,'ro')
-    plt.plot(x,y1)
-    plt.plot(x,y2)
+    # * graph equation 1
+    plt.plot(x,eq1)
+    # * graph equation 2
+    plt.plot(x,eq2)
     plt.show()
 
 def plot_roots_quadraticf():
-  pass
+    print("0 = ax\u00b2 + bx + c")
+    a = float(input("a = "))
+    b = float(input("b = "))
+    c = float(input("c = "))
+    
+    # * Check for non-real answers:
+    if b**2-4*a*c < 0:
+        print('No real roots')
+    else:
+        fig,ax,x = displaying_axis()
+        y = a *x**2 + b*x + c
+        # * vertex
+        vx = - b /(2*a)
+        vy = a * vx ** 2 + b * vx + c
+        print(f'Vertex = ( {vx} , {vy})')
+        plt.plot(vx,vy,'ro')
+        # * Write your code here, changing x1 and x2
+        x1 = (-b + math.sqrt(b**2 - 4*a*c))/(2*a)
+        x2 = (-b - math.sqrt(b**2 - 4*a*c))/(2*a)
+        print('The roots are ', x1, ' and ', x2)
+        plt.plot(x1,0,'ro')
+        plt.plot(x2,0,'ro')
+        plt.plot(x,y)
+        
+        plt.show()
 
 print('[1] Display the graph and a table of values for any "y=" equation input')
 print('[2] Solve a system of two equations without graphing')
@@ -103,6 +138,7 @@ print('[3] Graph two equations and plot the point of intersection')
 print('[4] Given a, b and c in a quadratic equation, plot the roots and vertex')
 
 x=int(input('Choose an option [1-4]: '))
+print('------------------------------------------------------------------------')
 if x==1:
   graph_table_equation()
 elif x==2:
